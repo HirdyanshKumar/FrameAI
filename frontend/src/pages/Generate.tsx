@@ -45,7 +45,7 @@ const Generate = () => {
   return (
     <>
     <SoftBackdrop />
-    <div className='pt-24 min-h-screen'></div>
+    <div className='pt-24 min-h-screen'>
     <main className='max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pb-28 lg:pb-8'>
         <div className='grid lg:grid-cols-[400px_1fr] gap-8'>
             {/* {LEFT SIDE} */}
@@ -102,6 +102,7 @@ const Generate = () => {
 
         </div>
     </main>
+    </div>
 
     </>
   )

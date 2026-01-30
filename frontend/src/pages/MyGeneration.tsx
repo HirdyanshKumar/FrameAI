@@ -41,7 +41,7 @@ const MyGeneration = () => {
     <SoftBackdrop/>
     <div className="mt-32 min-h-screen px-6 md:px-16 lg:px-24 xl:px-32">
       {/* HEADER */}
-      <div className="mb-8 ">
+      <div className="mb-8">
         <h1 className="text-2xl font-bold text-zinc-200">My Generations</h1>
         <p className="text-sm text-zinc-400 mt-1">View and manage all your AI-generated thumbnails</p>
 
@@ -73,7 +73,7 @@ const MyGeneration = () => {
               <div key={thumb._id} onClick={()=> navigate(`/generate/${thumb._id}`)}
               className="mb-8 group relative cursor-pointer rounded-2xl
               bg-white/6 border border-white/10 trasition shadow-xl
-              break">
+              break-inside-avoid">
               {/* Image */}
               <div className={`relative overflow-hidden rounded-t-2xl ${aspectClass} bg-black`}>
                 {thumb.image_url ? 
@@ -108,7 +108,7 @@ const MyGeneration = () => {
                 className="size-6 bg-black/50 p-1 rounded hover:bg-pink-600 transition-all"/>
 
                 <DownloadIcon onClick={()=>handleDownload(thumb.image_url!)} className="size-6 bg-black/50 p-1 rounded hover:bg-pink-600 transition-all"/>
-                <Link target="_blank" to={`/preview?thumbnail_url = ${thumb.image_url}&title=${thumb.title}`}>
+                <Link target="_blank" to={`/preview?thumbnail_url=${thumb.image_url}&title=${thumb.title}`}>
                 <ArrowUpRightIcon className="size-6 bg-black/50 p-1 rounded hover:bg-pink-600 transition-all" />
                 </Link>
               </div>
