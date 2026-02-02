@@ -3,9 +3,14 @@ import { dummyThumbnails, type IThumbnail } from "../assets/assets"
 import SoftBackdrop from "../components/SoftBackdrop"
 import { Link, useNavigate } from "react-router-dom"
 import { ArrowUpRightIcon, DownloadIcon, TrashIcon } from "lucide-react"
+import { useAuth } from "../context/AuthContext"
+import api from "../configs/api"
+import toast from "react-hot-toast"
 
 const MyGeneration = () => {
 
+
+  const {isLoggedIn} = useAuth()
   const navigate = useNavigate()
 
   const aspectRatioClassMap : Record<string , string> = {
@@ -17,22 +22,46 @@ const MyGeneration = () => {
   const [thumbnails,setThumbnails] = useState<IThumbnail[]>([])
   const [loading,setLoading] = useState(false)
   const fetchThumbnails = async() => {
-    setThumbnails(dummyThumbnails as unknown as IThumbnail[])
-    setLoading(false)
+    try{
+        setLoading(true)
+        const {data} = await api.get('/api/user/thumbnails')
+        setThumbnails(data.thumbnails || [])
+    }catch(error:any){
+        console.log(error)
+        toast.error(error?.response?.data?.message || error.message)
+    }finally{
+      setLoading(false)
+    }
   }
   
   const handleDownload = (image_url : string ) => {
-    window.open(image_url,'_blank')
-
+        const link = document.createElement('a');
+        link.href = image_url.replace('/upload','/upload/fl_attachment')
+        document.body.appendChild(link);
+        link.click()
+        link.remove()
   }
 
   const handleDelete = async (id:string) => {
-    console.log(id)
+    try {
+      const confirm = window.confirm('Are you sure you want to delete this thumbnail ?')
+      if(!confirm){
+        return
+      }
+      const {data} = await api.delete(`/api/thumbnail/delete/${id}`)
+      toast.success(data.message)
+      setThumbnails(thumbnails.filter((t) => t._id !== id))
+    } catch (error:any) {
+      console.log(error)
+      toast.error(error?.response?.data?.message || error.message)     
+    }
     
   }
   useEffect(()=>{
-    fetchThumbnails()
-  },[])
+    if(isLoggedIn){
+      fetchThumbnails()
+    }
+  },[isLoggedIn])
    
 
 
@@ -105,11 +134,11 @@ const MyGeneration = () => {
               <div onClick={(e)=>e.stopPropagation()} className="absolute bottom-2 right-2 max-sm:flex sm:hidden group-hover:flex gap-1.5">
                 <TrashIcon 
                 onClick={()=>handleDelete(thumb._id)}
-                className="size-6 bg-black/50 p-1 rounded hover:bg-pink-600 transition-all"/>
+                className="size-6 bg-black/50 p-1 rounded hover:bg-brand-purple transition-all"/>
 
-                <DownloadIcon onClick={()=>handleDownload(thumb.image_url!)} className="size-6 bg-black/50 p-1 rounded hover:bg-pink-600 transition-all"/>
+                <DownloadIcon onClick={()=>handleDownload(thumb.image_url!)} className="size-6 bg-black/50 p-1 rounded hover:bg-brand-purple transition-all"/>
                 <Link target="_blank" to={`/preview?thumbnail_url=${thumb.image_url}&title=${thumb.title}`}>
-                <ArrowUpRightIcon className="size-6 bg-black/50 p-1 rounded hover:bg-pink-600 transition-all" />
+                <ArrowUpRightIcon className="size-6 bg-black/50 p-1 rounded hover:bg-brand-purple transition-all" />
                 </Link>
               </div>
             </div>
