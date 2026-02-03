@@ -1,0 +1,55 @@
+<svg width="512px" height="512px" viewBox="0 0 512 512" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>AI Thumbnail Generator App Icon</title>
+    <defs>
+        <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop stop-color="#6a11cb" offset="0%"></stop>
+            <stop stop-color="#2575fc" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient id="sparkGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+             <stop stop-color="#FFD700" offset="0%"></stop>
+             <stop stop-color="#FF8C00" offset="100%"></stop>
+        </linearGradient>
+         <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+            <feMerge>
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+    </defs>
+
+    <rect x="0" y="0" width="512" height="512" rx="110" ry="110" fill="url(#bgGradient)"></rect>
+
+    <g transform="translate(56, 106)"> <rect x="0" y="0" width="400" height="300" rx="30" fill="#FFFFFF" opacity="0.15"></rect>
+        <rect x="10" y="10" width="380" height="280" rx="25" stroke="#FFFFFF" stroke-width="8" fill="none" opacity="0.8"></rect>
+
+
+        <g transform="translate(30, 80)" fill="none" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M0,180 L70,90 L120,140 L200,40 L340,180"></path>
+            
+            <g stroke-width="6" opacity="0.7">
+                <path d="M70,90 L70,180"></path>
+                <path d="M200,40 L200,180"></path>
+                <path d="M120,140 L160,140"></path>
+                <circle cx="70" cy="90" r="6" fill="#FFFFFF"></circle>
+                <circle cx="200" cy="40" r="6" fill="#FFFFFF"></circle>
+                 <circle cx="160" cy="140" r="6" fill="#FFFFFF"></circle>
+                 <circle cx="200" cy="110" r="6" fill="#FFFFFF"></circle>
+                 <path d="M200,110 L260,110 L290,140"></path>
+            </g>
+        </g>
+
+        <g transform="translate(280, 60)" filter="url(#glow)">
+            <circle cx="0" cy="0" r="35" fill="url(#sparkGradient)"></circle>
+            <g stroke="#FFFFFF" stroke-width="6" stroke-linecap="round">
+                 <path d="M40,0 L60,0"></path>
+                 <path d="M0,-40 L0,-60"></path>
+                 <path d="M28,28 L42,42"></path>
+                 <path d="M-28,-28 L-42,-42"></path>
+                 <circle cx="65" cy="0" r="5" fill="#FFFFFF"></circle>
+                 <circle cx="0" cy="-65" r="5" fill="#FFFFFF"></circle>
+            </g>
+            <path d="M0,-20 L5,-5 L20,0 L5,5 L0,20 L-5,5 L-20,0 L-5,-5 Z" fill="#FFFFFF"></path>
+        </g>
+    </g>
+</svg>
